@@ -240,6 +240,22 @@ function Problem4() {
   // TODO 4-2: 그 외에는 아래 URL로 fetch 해서 setResults에 넣으세요.
   //   URL: https://jsonplaceholder.typicode.com/posts?title_like=${keyword}
   // TODO 4-3: 의존성 배열에 [keyword]를 넣으세요.
+  useEffect(() => {
+    if (keyword.length < 2) {
+      setResults([]); //되는데 왜 빨간 밑줄 해놓는거임 불편하게.. 랜더링 경고라고는 하는데 거슬리네 아오
+      return;
+    }
+
+    async function search() {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?title_like=${keyword}`,
+      );
+      const data = await response.json();
+      setResults(data);
+    }
+
+    search(); // 👈 이거 반드시 필요
+  }, [keyword]);
   // HINT:
   //   useEffect(() => {
   //     if (keyword.length < 2) { setResults([]); return }

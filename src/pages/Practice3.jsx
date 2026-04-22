@@ -56,13 +56,24 @@ function Problem1() {
       <div className="practice-card" style={{ marginBottom: 12 }}>
         {/* TODO 1-1: isLoggedIn 값에 따라 메시지를 삼항 연산자로 분기하세요. */}
         {/* HINT: {isLoggedIn ? '환영합니다!' : '로그인이 필요합니다'} */}
-        <p>{/* 여기에 조건부 메시지 */}</p>
+        <p>
+          {/* 여기에 조건부 메시지 */}
+          {isLoggedIn ? "환영합니다" : "로그인이 필요합니다"}
+        </p>
       </div>
 
       <div>
         {/* TODO 1-2: isLoggedIn 값에 따라 "로그아웃" / "로그인" 버튼을 삼항 연산자로 렌더링하세요. */}
         {/* HINT: 버튼 클릭 시 setIsLoggedIn(!isLoggedIn)으로 상태를 토글하세요. */}
         {/* 여기에 조건부 버튼 */}
+        {isLoggedIn ? (
+          // 제발 ()=> 이거 까먹지좀말자 왤케헷갈려하냐
+          <button onClick={() => setIsLoggedIn((prev) => !prev)}>
+            로그아웃
+          </button>
+        ) : (
+          <button onClick={() => setIsLoggedIn((prev) => !prev)}>로그인</button>
+        )}
       </div>
 
       <p className="expected">
@@ -174,13 +185,19 @@ function Problem3() {
 function UserProfile({ user }) {
   // TODO 3-1: user가 null/undefined이면 "사용자를 찾을 수 없습니다." 메시지를 return하세요.
   // HINT: if (!user) return <p>사용자를 찾을 수 없습니다.</p>
+  if (!user) return <p>사용자를 찾을 수 없습니다</p>;
 
   // TODO 3-2: user.isActive가 false면 "비활성화된 사용자입니다." 메시지를 return하세요.
+  if (!user.isActive) return <p>비활성화된 사용자입니다</p>;
 
   // TODO 3-3: 정상 케이스에서 user.name과 user.email을 표시하세요.
   //   (예: <h4>{user.name}</h4><p>{user.email}</p>)
   return (
-    <p style={{ color: "var(--accent)" }}>TODO: UserProfile을 구현하세요.</p>
+    <>
+      <p style={{ color: "var(--accent)" }}>TODO: UserProfile을 구현하세요.</p>
+      <h4>{user.name}</h4>
+      <p>{user.email}</p>
+    </>
   );
 }
 
@@ -199,7 +216,7 @@ function Problem4() {
   ]);
 
   function addFirst() {
-    const newId = Math.max(0, ...todos.map((t) => t.id)) + 1;
+    const newId = Math.max(0, ...todos.map((t) => t.id)) + 1; //0은 todos 가 비었을 때 대비 그리고 가장 큰 아이디에 +1한게 새로운 아이디
     setTodos([{ id: newId, text: `새 할 일 #${newId}` }, ...todos]);
   }
 
@@ -224,8 +241,8 @@ function Problem4() {
       <ul className="practice-list">
         {/* TODO 4-1: 아래 map의 key를 index에서 todo.id로 바꾸세요. */}
         {/* HINT: key={index}  →  key={todo.id} */}
-        {todos.map((todo, index) => (
-          <TodoItem key={index} todo={todo} />
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
 

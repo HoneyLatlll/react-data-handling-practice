@@ -123,6 +123,7 @@ function Problem2() {
 
       // TODO 2-1: data.length < LIMIT 이면 setHasMore(false)로 끝을 표시하세요.
       //   (받은 개수가 요청보다 적으면 마지막 페이지라는 뜻)
+      if (data.length < LIMIT) setHasMore(false);
 
       setPosts((prev) => [...prev, ...data]);
     }
@@ -151,9 +152,13 @@ function Problem2() {
         {/* TODO 2-2: hasMore가 true일 때만 "더 보기" 버튼을 보여주고,
                     false일 때는 <p>✅ 모든 게시물을 불러왔습니다.</p>를 보여주세요. */}
         {/* HINT: 삼항 연산자 사용 */}
-        <button onClick={() => setOffset((prev) => prev + LIMIT)}>
-          더 보기
-        </button>
+        {hasMore ? (
+          <button onClick={() => setOffset((prev) => prev + LIMIT)}>
+            더 보기
+          </button>
+        ) : (
+          <p>✅ 모든 게시물을 불러왔습니다.</p>
+        )}
       </div>
 
       <p className="expected">

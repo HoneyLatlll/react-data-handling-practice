@@ -61,7 +61,12 @@ function Problem1() {
 
       {/* TODO 1-1: 아래 ul 안에 fruits를 map으로 렌더링하세요. */}
       {/* HINT: key에는 index를 사용해도 OK (이 배열은 바뀌지 않으므로) */}
-      <ul className="practice-list">{/* 여기에 map 코드를 작성하세요 */}</ul>
+      <ul className="practice-list">
+        {/* 여기에 map 코드를 작성하세요 */}
+        {fruits.map((fruit) => (
+          <li>{fruit}</li>
+        ))}
+      </ul>
 
       <p className="expected">
         기대 결과: 사과 / 바나나 / 오렌지 / 포도 / 딸기 5개 항목이 차례로 보여야
@@ -93,7 +98,17 @@ function Problem2() {
       {/* TODO 2-1: members.map으로 아래 div 안에 멤버 카드를 렌더링하세요. */}
       {/* TODO 2-2: key에는 member.id를 사용하세요. */}
       {/* HINT: <div className="practice-card"> 안에 이름(<strong>)과 역할(<span>)을 함께 표시해보세요. */}
-      <div>{/* 여기에 map 코드를 작성하세요 */}</div>
+      <div className="practice-card">
+        {/* 여기에 map 코드를 작성하세요 */}
+        {members.map((member) => (
+          <div key={member.key}>
+            {/* 하나의 요소만 반환할 수 있기 때문에 div로 감싸야함 ㅇㅇ */}
+            <strong>이름: {member.name} </strong>
+            <span>역할: {member.role} </span>
+            <br />
+          </div>
+        ))}
+      </div>
 
       <p className="expected">
         기대 결과: 홍길동 / 김철수 / 이영희 / 박민수 4명의 카드가 이름과 역할과
@@ -129,6 +144,7 @@ function Problem3() {
       {/* TODO 3-1: products.map으로 ProductCard를 렌더링하세요. */}
       {/* TODO 3-2: product 객체를 prop으로 넘기고, key는 product.id를 사용하세요. */}
       {/* HINT: <ProductCard key={...} product={...} /> 형태 */}
+
       <div>
         {/* 여기에 map 코드를 작성하세요 */}
         {products.map((product) => {
@@ -171,7 +187,15 @@ function Problem4() {
       {/* TODO 4-1: users.map으로 li 요소들을 렌더링하세요. key는 user.id */}
       {/* TODO 4-2: user.active가 true일 때만 <span className="badge">활성</span>을 표시하세요. */}
       {/* HINT: {user.active && <span className="badge">활성</span>} 처럼 && 연산자를 사용합니다. */}
-      <ul className="practice-list">{/* 여기에 map 코드를 작성하세요 */}</ul>
+      <ul className="practice-list">
+        {/* 여기에 map 코드를 작성하세요 */}
+        {users.map((user) => (
+          <li key={user.id}>
+            <span>{user.name}</span>
+            {user.active && <span className="badge">활성</span>}
+          </li>
+        ))}
+      </ul>
 
       <p className="expected">
         기대 결과: 4명 모두 이름이 보이되, 홍길동/이영희 옆에만 "활성" 뱃지가
@@ -204,7 +228,24 @@ function Problem5() {
       {/* TODO 5-1: categories.map으로 각 카테고리 블록을 만들고, h4에 카테고리 이름을 표시하세요. */}
       {/* TODO 5-2: 각 카테고리 안에서 items.map으로 li들을 렌더링하세요. */}
       {/* HINT: 바깥쪽 key는 category.id, 안쪽 key는 index 또는 item 문자열을 써도 OK */}
-      <div>{/* 여기에 중첩 map 코드를 작성하세요 */}</div>
+      <div>
+        {/* 여기에 중첩 map 코드를 작성하세요 */}
+        {categories.map((category) => {
+          //return 안쓰고도 쓸 수 있긴 해 근데 구분이 아직 좀 어려워서 바꾸기 귀찮
+          return (
+            <div key={category.key}>
+              <h4>{category.name}</h4>
+              {category.items.map((item) => {
+                return (
+                  <div key={item}>
+                    <li>{item}</li>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
 
       <p className="expected">
         기대 결과: "과일(사과/바나나/오렌지)", "채소(양파/당근/배추)",

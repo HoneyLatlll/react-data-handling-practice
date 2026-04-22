@@ -57,6 +57,7 @@ function Problem1() {
   // HINT: todos.filter(todo => todo.id !== id)
   function deleteTodo(id) {
     // 여기에 구현하세요
+    setTodos(todos.filter((todo) => todo.id !== id));
   }
 
   return (
@@ -72,7 +73,7 @@ function Problem1() {
             <span>{todo.text}</span>
             {/* TODO 1-2: 아래 버튼 onClick에서 deleteTodo(todo.id)를 호출하세요. */}
             {/* HINT: 매개변수를 전달할 땐 () => deleteTodo(todo.id) 처럼 화살표 함수로 감쌉니다. */}
-            <button>삭제</button>
+            <button onClick={() => deleteTodo(todo.id)}>삭제</button>
           </li>
         ))}
       </ul>
@@ -163,6 +164,7 @@ function Problem3() {
   // HINT: todos.filter(todo => !todo.done)
   function deleteCompleted() {
     // 여기에 구현하세요
+    setTodos(todos.filter((todo) => todo.done === false));
   }
 
   return (
@@ -175,7 +177,8 @@ function Problem3() {
 
       <div className="toolbar">
         {/* TODO 3-2: 아래 버튼 onClick에서 deleteCompleted를 연결하세요. */}
-        <button>완료된 항목 삭제</button>
+        <button onClick={deleteCompleted}>완료된 항목 삭제</button>
+        {/* ()=>deleteCompleted() 이거랑 헷갈리지 말자 용도가 다르니까 */}
       </div>
 
       <ul className="practice-list">
@@ -226,7 +229,9 @@ function Problem4() {
   //   - 그 외 → product.category === filter 인 것만
   // HINT: const filteredProducts = products.filter(p => filter === 'all' || p.category === filter)
   // ⚠️ 주의: 이 값은 state가 아니라 "계산된 값(파생 상태)"입니다. useState 사용 금지!
-  const filteredProducts = []; // 이 줄을 수정하세요
+  const filteredProducts = products.filter(
+    (p) => filter === "all" || p.category === filter,
+  );
 
   return (
     <div className="exercise">
@@ -237,8 +242,7 @@ function Problem4() {
       </p>
 
       <div className="toolbar">
-        {/* TODO 4-2: 각 버튼을 눌렀을 때 setFilter로 필터값을 바꾸고,
-                     현재 filter와 같으면 className="active"를 적용하세요. */}
+        {/* TODO 4-2: 각 버튼을 눌렀을 때 setFilter로 필터값을 바꾸고,현재 filter와 같으면 className="active"를 적용하세요. */}
         <button
           className={filter === "all" ? "active" : ""}
           onClick={() => setFilter("all")}
@@ -246,6 +250,24 @@ function Problem4() {
           전체
         </button>
         {/* TODO 4-3: '전자기기', '의류', '식품' 버튼을 동일한 패턴으로 추가하세요. */}
+        <button
+          className={filter === "all" ? "active" : ""}
+          onClick={() => setFilter("전자기기")}
+        >
+          전자기기
+        </button>
+        <button
+          className={filter === "all" ? "active" : ""}
+          onClick={() => setFilter("의류")}
+        >
+          의류
+        </button>
+        <button
+          className={filter === "all" ? "active" : ""}
+          onClick={() => setFilter("식품")}
+        >
+          식품
+        </button>
       </div>
 
       <ul className="practice-list">

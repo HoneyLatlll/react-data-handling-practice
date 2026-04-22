@@ -54,6 +54,7 @@ function Problem1() {
   // HINT: setItems([...items, input])
   function addLast() {
     // 여기에 구현하세요
+    setItems([...items, input]);
   }
 
   // TODO 1-2: addFirst 함수를 완성하세요.
@@ -61,6 +62,7 @@ function Problem1() {
   // HINT: setItems([input, ...items])
   function addFirst() {
     // 여기에 구현하세요
+    setItems([input, ...items]);
   }
 
   return (
@@ -123,6 +125,11 @@ function Problem2() {
   //   )
   function toggleTodo(id) {
     // 여기에 구현하세요
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo,
+      ),
+    );
   }
 
   return (
@@ -255,10 +262,13 @@ function Problem4() {
   //   setForm({ ...form, [name]: value })
   function handleChange(e) {
     // 여기에 구현하세요
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   }
 
   function handleReset() {
     // TODO 4-2: form을 초기값 { name: '', email: '', message: '' }로 되돌리세요.
+    setForm({ name: "", email: "", message: "" });
   }
 
   return (
@@ -284,16 +294,25 @@ function Problem4() {
           type="text"
           placeholder="이름"
           // name="name", value={form.name}, onChange={handleChange} 를 추가하세요
+          name="name"
+          value={form.name}
+          onChange={handleChange}
         />
         <input
           type="text"
           placeholder="이메일"
           // name="email", value={form.email}, onChange={handleChange} 를 추가하세요
+          name="email"
+          value={form.email}
+          onChange={handleChange}
         />
         <input
           type="text"
           placeholder="메시지"
           // name="message", value={form.message}, onChange={handleChange} 를 추가하세요
+          name="message"
+          value={form.message}
+          onChange={handleChange}
         />
       </div>
 
