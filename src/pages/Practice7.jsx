@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 function Practice7() {
   return (
@@ -9,12 +9,24 @@ function Practice7() {
       </p>
 
       <Problem1 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem2 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem3 />
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -24,7 +36,7 @@ function Practice7() {
 // 사용자가 버튼을 빠르게 연타했을 때도 "누른 횟수만큼" 정확히 증가해야 합니다.
 // ─────────────────────────────────────────────
 function Problem1() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   function handleClick() {
     // TODO 1-1: 1초(1000ms) 뒤에 count를 +1 하도록 setTimeout을 작성하세요.
@@ -32,6 +44,7 @@ function Problem1() {
     //     → 빠르게 연타하면 각각 "클릭 당시의 count"를 캡처해서 같은 값만 저장합니다.
     //   ✅ 올바른 예: setTimeout(() => setCount(prev => prev + 1), 1000)
     //     → React가 실행 시점의 최신 값을 prev로 넣어줍니다.
+    setTimeout(() => setCount((prev) => prev + 1), 1000);
   }
 
   return (
@@ -42,7 +55,10 @@ function Problem1() {
         함수형 업데이트를 사용하지 않으면 1로 멈춥니다.
       </p>
 
-      <div className="practice-card" style={{ fontSize: 28, textAlign: 'center' }}>
+      <div
+        className="practice-card"
+        style={{ fontSize: 28, textAlign: "center" }}
+      >
         count: {count}
       </div>
 
@@ -55,7 +71,7 @@ function Problem1() {
         기대 결과: 버튼을 N번 누르면 잠시 후 count가 정확히 N만큼 증가합니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -65,15 +81,15 @@ function Problem1() {
 // 값 전달 방식으로 쓰면 3번 다 같은 기준값을 쓰기 때문에 1만 증가합니다.
 // ─────────────────────────────────────────────
 function Problem2() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   function handleBad() {
     // ❌ 학습용 잘못된 예시 — 이 함수는 수정하지 마세요.
     // 한 함수 안에서 count + 1을 3번 호출하면, count는 여전히 "현재 렌더링의 값"이라
     // setCount(0+1), setCount(0+1), setCount(0+1) 이 되어 결국 +1만 됩니다.
-    setCount(count + 1)
-    setCount(count + 1)
-    setCount(count + 1)
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
   }
 
   function handleGood() {
@@ -85,10 +101,14 @@ function Problem2() {
     <div className="exercise">
       <h3>문제 2: "한 번에 +3" 버튼 (함수형 업데이트 필수)</h3>
       <p>
-        아래 "❌ 값 전달 +3" 버튼을 눌러 보면 1씩만 증가합니다. 반면 "✅ 함수형 +3"은 정확히 3씩 증가해야 합니다.
+        아래 "❌ 값 전달 +3" 버튼을 눌러 보면 1씩만 증가합니다. 반면 "✅ 함수형
+        +3"은 정확히 3씩 증가해야 합니다.
       </p>
 
-      <div className="practice-card" style={{ fontSize: 28, textAlign: 'center' }}>
+      <div
+        className="practice-card"
+        style={{ fontSize: 28, textAlign: "center" }}
+      >
         count: {count}
       </div>
 
@@ -102,7 +122,7 @@ function Problem2() {
         기대 결과: "❌ 값 전달 +3"은 1씩만 증가 / "✅ 함수형 +3"은 3씩 증가.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -112,23 +132,23 @@ function Problem2() {
 // 반드시 setPosts(prev => [...prev, ...data]) 패턴을 쓰세요.
 // ─────────────────────────────────────────────
 function Problem3() {
-  const [posts, setPosts] = useState([])
-  const [offset, setOffset] = useState(0)
-  const LIMIT = 5
+  const [posts, setPosts] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const LIMIT = 5;
 
   useEffect(() => {
     async function load() {
       const res = await fetch(
         `https://jsonplaceholder.typicode.com/posts?_start=${offset}&_limit=${LIMIT}`,
-      )
-      const data = await res.json()
+      );
+      const data = await res.json();
 
       // TODO 3-1: setPosts를 함수형 업데이트로 작성해서, 기존 posts 뒤에 data를 이어붙이세요.
       //   ❌ 값 전달: setPosts([...posts, ...data])  → 빠르게 연타 시 일부가 덮어써짐
       //   ✅ 함수형:  setPosts(prev => [...prev, ...data])  → 항상 누적
     }
-    load()
-  }, [offset])
+    load();
+  }, [offset]);
 
   function loadMore() {
     // TODO 3-2: offset도 함수형 업데이트로 증가시키세요.
@@ -139,8 +159,8 @@ function Problem3() {
     <div className="exercise">
       <h3>문제 3: Load More 누적 패턴</h3>
       <p>
-        "더 보기"를 빠르게 연타해도 중복 없이, 빠짐 없이 게시글이 누적되어야 합니다.
-        posts와 offset 모두 함수형 업데이트를 사용하세요.
+        "더 보기"를 빠르게 연타해도 중복 없이, 빠짐 없이 게시글이 누적되어야
+        합니다. posts와 offset 모두 함수형 업데이트를 사용하세요.
       </p>
 
       <ul className="practice-list">
@@ -155,7 +175,7 @@ function Problem3() {
 
       <div className="toolbar" style={{ marginTop: 12 }}>
         <button onClick={loadMore}>더 보기 (+{LIMIT})</button>
-        <span style={{ alignSelf: 'center', fontSize: 13 }}>
+        <span style={{ alignSelf: "center", fontSize: 13 }}>
           로드된 개수: {posts.length}
         </span>
       </div>
@@ -164,7 +184,7 @@ function Problem3() {
         기대 결과: 연타해도 정확히 5개씩 누적되어 목록에 추가됩니다.
       </p>
     </div>
-  )
+  );
 }
 
-export default Practice7
+export default Practice7;

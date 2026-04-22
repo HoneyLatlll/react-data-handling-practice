@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function Practice4() {
   return (
@@ -9,14 +9,32 @@ function Practice4() {
       </p>
 
       <Problem1 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem2 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem3 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem4 />
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -26,8 +44,8 @@ function Practice4() {
 // 스프레드 연산자로 새 배열을 만들어서 setState에 넘기세요.
 // ─────────────────────────────────────────────
 function Problem1() {
-  const [items, setItems] = useState(['사과', '바나나', '오렌지'])
-  const [input, setInput] = useState('')
+  const [items, setItems] = useState(["사과", "바나나", "오렌지"]);
+  const [input, setInput] = useState("");
 
   // TODO 1-1: addLast 함수를 완성하세요.
   //   - input이 빈 문자열이면 아무 것도 하지 않음
@@ -49,8 +67,9 @@ function Problem1() {
     <div className="exercise">
       <h3>문제 1: 배열에 항목 추가 (앞/뒤, 불변성 유지)</h3>
       <p>
-        입력한 값을 배열의 맨 뒤 또는 맨 앞에 추가하세요.
-        ⚠️ <code>items.push(...)</code>처럼 원본을 수정하면 React는 변경을 감지하지 못합니다.
+        입력한 값을 배열의 맨 뒤 또는 맨 앞에 추가하세요. ⚠️{" "}
+        <code>items.push(...)</code>처럼 원본을 수정하면 React는 변경을 감지하지
+        못합니다.
       </p>
 
       <div className="toolbar">
@@ -71,10 +90,11 @@ function Problem1() {
       </ul>
 
       <p className="expected">
-        기대 결과: "맨 뒤에 추가"는 리스트 끝에, "맨 앞에 추가"는 리스트 시작 부분에 새 항목이 추가됩니다.
+        기대 결과: "맨 뒤에 추가"는 리스트 끝에, "맨 앞에 추가"는 리스트 시작
+        부분에 새 항목이 추가됩니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -85,11 +105,11 @@ function Problem1() {
 // ─────────────────────────────────────────────
 function Problem2() {
   const [todos, setTodos] = useState([
-    { id: 1, text: '운동하기', done: false },
-    { id: 2, text: '책 읽기', done: false },
-    { id: 3, text: '코딩하기', done: true },
-    { id: 4, text: '청소하기', done: false },
-  ])
+    { id: 1, text: "운동하기", done: false },
+    { id: 2, text: "책 읽기", done: false },
+    { id: 3, text: "코딩하기", done: true },
+    { id: 4, text: "청소하기", done: false },
+  ]);
 
   // TODO 2-1: toggleTodo 함수를 완성하세요.
   //   - map으로 배열을 순회하면서
@@ -108,18 +128,23 @@ function Problem2() {
   return (
     <div className="exercise">
       <h3>문제 2: 할 일 완료/미완료 토글</h3>
-      <p>체크박스를 클릭하면 해당 항목의 <code>done</code> 값만 바뀌고, 나머지는 그대로 유지돼야 합니다.</p>
+      <p>
+        체크박스를 클릭하면 해당 항목의 <code>done</code> 값만 바뀌고, 나머지는
+        그대로 유지돼야 합니다.
+      </p>
 
       <ul className="practice-list">
         {todos.map((todo) => (
           <li key={todo.id}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input
                 type="checkbox"
                 checked={todo.done}
                 onChange={() => toggleTodo(todo.id)}
               />
-              <span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
+              <span
+                style={{ textDecoration: todo.done ? "line-through" : "none" }}
+              >
                 {todo.text}
               </span>
             </label>
@@ -128,10 +153,11 @@ function Problem2() {
       </ul>
 
       <p className="expected">
-        기대 결과: 체크박스를 누르면 해당 항목의 취소선이 토글되고, 다른 항목은 건드리지 않습니다.
+        기대 결과: 체크박스를 누르면 해당 항목의 취소선이 토글되고, 다른 항목은
+        건드리지 않습니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -142,33 +168,40 @@ function Problem2() {
 // ─────────────────────────────────────────────
 function Problem3() {
   const [products] = useState([
-    { id: 1, name: '노트북', price: 1200000 },
-    { id: 2, name: '마우스', price: 30000 },
-    { id: 3, name: '키보드', price: 80000 },
-    { id: 4, name: '모니터', price: 350000 },
-    { id: 5, name: '이어폰', price: 120000 },
-  ])
-  const [searchTerm, setSearchTerm] = useState('')
+    { id: 1, name: "노트북", price: 1200000 },
+    { id: 2, name: "마우스", price: 30000 },
+    { id: 3, name: "키보드", price: 80000 },
+    { id: 4, name: "모니터", price: 350000 },
+    { id: 5, name: "이어폰", price: 120000 },
+    { id: 6, name: "이어폰", price: 120000 },
+  ]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // TODO 3-1: filteredProducts를 계산하세요.
   //   - searchTerm이 빈 문자열이면 products 전체
   //   - 아니면 product.name에 searchTerm이 포함된 것만
   // HINT: products.filter(p => p.name.includes(searchTerm))
   // ⚠️ useState로 만들지 말 것! 일반 const 변수로 계산하세요.
-  const filteredProducts = [] // 이 줄을 수정하세요
+  const filteredProducts = products.filter((p) => {
+    // if (searchTerm) return p.name.includes(searchTerm);
+    // return p;
+    return p.name.includes(searchTerm); //빈문자열은 어디에나 있다
+  }); //디바운싱 : 짧은 시간내에 연속적으로 발생한 이벤트는 마지막 이벤트만 취급 디바운싱을 하면 리랜더링을 더 적게 할 수 있음
 
+  // 이 줄을 수정하세요
   // TODO 3-2: totalPrice를 계산하세요.
   //   - filteredProducts의 price들을 모두 더합니다.
   // HINT: filteredProducts.reduce((sum, p) => sum + p.price, 0)
   // ⚠️ useState로 만들지 말 것!
-  const totalPrice = 0 // 이 줄을 수정하세요
+  const totalPrice = filteredProducts.reduce((sum, p) => sum + p.price, 0); // 이 줄을 수정하세요
 
   return (
     <div className="exercise">
       <h3>문제 3: 검색 결과와 총합 (파생 상태)</h3>
       <p>
-        상품 이름 검색 결과와 그 총 가격을 표시하세요.
-        ⚠️ 이 두 값은 <code>useState</code>로 만들면 안 됩니다. 원본이 바뀔 때 동기화가 어긋나요.
+        상품 이름 검색 결과와 그 총 가격을 표시하세요. ⚠️ 이 두 값은{" "}
+        <code>useState</code>로 만들면 안 됩니다. 원본이 바뀔 때 동기화가
+        어긋나요.
       </p>
 
       <div className="toolbar">
@@ -179,7 +212,7 @@ function Problem3() {
           placeholder="상품 이름 검색"
           style={{ flex: 1, minWidth: 160 }}
         />
-        <span style={{ alignSelf: 'center' }}>
+        <span style={{ alignSelf: "center" }}>
           총 {filteredProducts.length}개 / {totalPrice.toLocaleString()}원
         </span>
       </div>
@@ -194,10 +227,11 @@ function Problem3() {
       </ul>
 
       <p className="expected">
-        기대 결과: 검색어를 입력할 때마다 목록, 개수, 총 가격이 자동으로 함께 갱신됩니다.
+        기대 결과: 검색어를 입력할 때마다 목록, 개수, 총 가격이 자동으로 함께
+        갱신됩니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -207,10 +241,10 @@ function Problem3() {
 // ─────────────────────────────────────────────
 function Problem4() {
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
+    name: "",
+    email: "",
+    message: "",
+  });
 
   // TODO 4-1: handleChange 함수를 완성하세요.
   //   - input의 name 속성을 key로, value를 값으로 사용해서
@@ -231,11 +265,20 @@ function Problem4() {
     <div className="exercise">
       <h3>문제 4: 문의 폼 (객체 state + 부분 업데이트)</h3>
       <p>
-        각 입력 필드에 <code>onChange</code>를 연결해서 하나의 핸들러로 form 객체의 해당 필드만 갱신하세요.
-        ⚠️ <code>setForm({'{ name: ... }'})</code>처럼 스프레드 없이 쓰면 다른 필드가 전부 날아갑니다.
+        각 입력 필드에 <code>onChange</code>를 연결해서 하나의 핸들러로 form
+        객체의 해당 필드만 갱신하세요. ⚠️{" "}
+        <code>setForm({"{ name: ... }"})</code>처럼 스프레드 없이 쓰면 다른
+        필드가 전부 날아갑니다.
       </p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 420 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          maxWidth: 420,
+        }}
+      >
         {/* TODO 4-3: 각 input에 name 속성과 value, onChange를 연결하세요. */}
         <input
           type="text"
@@ -259,16 +302,19 @@ function Problem4() {
       </div>
 
       <div className="practice-card" style={{ marginTop: 12 }}>
-        <p style={{ fontSize: 13, color: 'var(--text)' }}>현재 form 상태:</p>
-        <pre style={{ margin: 0, fontSize: 13 }}>{JSON.stringify(form, null, 2)}</pre>
+        <p style={{ fontSize: 13, color: "var(--text)" }}>현재 form 상태:</p>
+        <pre style={{ margin: 0, fontSize: 13 }}>
+          {JSON.stringify(form, null, 2)}
+        </pre>
       </div>
 
       <p className="expected">
-        기대 결과: 어느 필드를 입력해도 다른 필드 값이 사라지지 않고,
-        아래 "현재 form 상태"에 실시간으로 반영됩니다. "초기화" 버튼을 누르면 모든 필드가 빈 값으로 돌아옵니다.
+        기대 결과: 어느 필드를 입력해도 다른 필드 값이 사라지지 않고, 아래 "현재
+        form 상태"에 실시간으로 반영됩니다. "초기화" 버튼을 누르면 모든 필드가
+        빈 값으로 돌아옵니다.
       </p>
     </div>
-  )
+  );
 }
 
-export default Practice4
+export default Practice4;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function Practice3() {
   return (
@@ -9,14 +9,32 @@ function Practice3() {
       </p>
 
       <Problem1 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem2 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem3 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem4 />
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -25,7 +43,7 @@ function Practice3() {
 // "A 아니면 B"는 삼항 연산자 ? : 로 표현합니다.
 // ─────────────────────────────────────────────
 function Problem1() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="exercise">
@@ -48,10 +66,11 @@ function Problem1() {
       </div>
 
       <p className="expected">
-        기대 결과: 버튼을 클릭할 때마다 "로그인" ↔ "로그아웃" 버튼이 교차하고, 메시지도 함께 바뀝니다.
+        기대 결과: 버튼을 클릭할 때마다 "로그인" ↔ "로그아웃" 버튼이 교차하고,
+        메시지도 함께 바뀝니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -61,14 +80,15 @@ function Problem1() {
 // && 왼쪽에는 반드시 "boolean"이 오도록 `count > 0` 식으로 명시적 비교를 쓰세요.
 // ─────────────────────────────────────────────
 function Problem2() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div className="exercise">
       <h3>문제 2: 알림 뱃지 (0일 때 "0"이 찍히면 안 됨)</h3>
       <p>
-        <code>count</code>가 0보다 클 때만 알림 뱃지를 표시하세요.
-        ⚠️ <code>{`{count && ...}`}</code>처럼 쓰면 count가 0일 때 화면에 "0"이 그대로 찍히는 함정에 빠집니다.
+        <code>count</code>가 0보다 클 때만 알림 뱃지를 표시하세요. ⚠️{" "}
+        <code>{`{count && ...}`}</code>처럼 쓰면 count가 0일 때 화면에 "0"이
+        그대로 찍히는 함정에 빠집니다.
       </p>
 
       <div className="toolbar">
@@ -83,13 +103,15 @@ function Problem2() {
         {/* HINT: {count > 0 && <span className="badge">{count}</span>} */}
         {/* ❌ 잘못된 예: {count && <span className="badge">{count}</span>}  → count가 0일 때 "0"이 찍힙니다. */}
         {/* 여기에 조건부 뱃지 */}
+        {count > 0 && <span className="badge">{count}</span>}
       </div>
 
       <p className="expected">
-        기대 결과: count가 1 이상일 때만 숫자 뱃지가 보이고, 0일 때는 뱃지 자체가 숨겨집니다. ("0" 글자도 보이면 안 됩니다)
+        기대 결과: count가 1 이상일 때만 숫자 뱃지가 보이고, 0일 때는 뱃지
+        자체가 숨겨집니다. ("0" 글자도 보이면 안 됩니다)
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -98,36 +120,37 @@ function Problem2() {
 // 조건이 많으면 JSX 안에 삼항을 중첩하지 말고, 함수 첫머리에서 early return 하세요.
 // ─────────────────────────────────────────────
 function Problem3() {
-  const [userIndex, setUserIndex] = useState(0)
+  const [userIndex, setUserIndex] = useState(0);
   const users = [
     null, // 0: 사용자 없음
-    { name: '홍길동', email: 'hong@example.com', isActive: true }, // 1: 정상
-    { name: '김철수', email: 'kim@example.com', isActive: false }, // 2: 비활성
-  ]
-  const user = users[userIndex]
+    { name: "홍길동", email: "hong@example.com", isActive: true }, // 1: 정상
+    { name: "김철수", email: "kim@example.com", isActive: false }, // 2: 비활성
+  ];
+  const user = users[userIndex];
 
   return (
     <div className="exercise">
       <h3>문제 3: UserProfile을 early return으로 작성</h3>
       <p>
-        아래 <code>UserProfile</code> 컴포넌트를 완성하세요. 예외 케이스부터 early return 하고, 정상 케이스는 맨 아래에 작성합니다.
+        아래 <code>UserProfile</code> 컴포넌트를 완성하세요. 예외 케이스부터
+        early return 하고, 정상 케이스는 맨 아래에 작성합니다.
       </p>
 
       <div className="toolbar">
         <button
-          className={userIndex === 0 ? 'active' : ''}
+          className={userIndex === 0 ? "active" : ""}
           onClick={() => setUserIndex(0)}
         >
           user: null
         </button>
         <button
-          className={userIndex === 1 ? 'active' : ''}
+          className={userIndex === 1 ? "active" : ""}
           onClick={() => setUserIndex(1)}
         >
           정상 사용자
         </button>
         <button
-          className={userIndex === 2 ? 'active' : ''}
+          className={userIndex === 2 ? "active" : ""}
           onClick={() => setUserIndex(2)}
         >
           비활성 사용자
@@ -145,7 +168,7 @@ function Problem3() {
         <br />- 그 외에는 이름과 이메일을 표시합니다.
       </p>
     </div>
-  )
+  );
 }
 
 function UserProfile({ user }) {
@@ -156,7 +179,9 @@ function UserProfile({ user }) {
 
   // TODO 3-3: 정상 케이스에서 user.name과 user.email을 표시하세요.
   //   (예: <h4>{user.name}</h4><p>{user.email}</p>)
-  return <p style={{ color: 'var(--accent)' }}>TODO: UserProfile을 구현하세요.</p>
+  return (
+    <p style={{ color: "var(--accent)" }}>TODO: UserProfile을 구현하세요.</p>
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -168,26 +193,27 @@ function UserProfile({ user }) {
 // ─────────────────────────────────────────────
 function Problem4() {
   const [todos, setTodos] = useState([
-    { id: 1, text: '운동하기' },
-    { id: 2, text: '책 읽기' },
-    { id: 3, text: '코딩하기' },
-  ])
+    { id: 1, text: "운동하기" },
+    { id: 2, text: "책 읽기" },
+    { id: 3, text: "코딩하기" },
+  ]);
 
   function addFirst() {
-    const newId = Math.max(0, ...todos.map((t) => t.id)) + 1
-    setTodos([{ id: newId, text: `새 할 일 #${newId}` }, ...todos])
+    const newId = Math.max(0, ...todos.map((t) => t.id)) + 1;
+    setTodos([{ id: newId, text: `새 할 일 #${newId}` }, ...todos]);
   }
 
   function removeFirst() {
-    setTodos(todos.slice(1))
+    setTodos(todos.slice(1));
   }
 
   return (
     <div className="exercise">
       <h3>문제 4: key를 올바르게 설정해서 체크 상태 버그 고치기</h3>
       <p>
-        아래 목록의 체크박스 중 하나를 체크한 뒤, "맨 앞에 추가" 또는 "맨 앞 삭제" 버튼을 눌러 보세요.
-        지금은 체크 상태가 엉뚱한 항목으로 옮겨갑니다. key를 고쳐서 버그를 해결하세요.
+        아래 목록의 체크박스 중 하나를 체크한 뒤, "맨 앞에 추가" 또는 "맨 앞
+        삭제" 버튼을 눌러 보세요. 지금은 체크 상태가 엉뚱한 항목으로 옮겨갑니다.
+        key를 고쳐서 버그를 해결하세요.
       </p>
 
       <div className="toolbar">
@@ -204,18 +230,19 @@ function Problem4() {
       </ul>
 
       <p className="expected">
-        기대 결과: key를 todo.id로 바꾸면, 항목이 추가·삭제돼도 체크 상태가 원래 항목에 그대로 유지됩니다.
+        기대 결과: key를 todo.id로 바꾸면, 항목이 추가·삭제돼도 체크 상태가 원래
+        항목에 그대로 유지됩니다.
       </p>
     </div>
-  )
+  );
 }
 
 function TodoItem({ todo }) {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
 
   return (
     <li>
-      <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <input
           type="checkbox"
           checked={checked}
@@ -225,7 +252,7 @@ function TodoItem({ todo }) {
       </label>
       {checked && <span className="badge">체크됨</span>}
     </li>
-  )
+  );
 }
 
-export default Practice3
+export default Practice3;

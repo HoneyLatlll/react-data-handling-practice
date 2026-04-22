@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function Practice12() {
   return (
@@ -7,12 +7,24 @@ function Practice12() {
       <p className="page-subtitle">챕터 3-3. onSubmit 이벤트 학습 후</p>
 
       <Problem1 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem2 />
-      <hr style={{ margin: '32px 0', border: 0, borderTop: '1px solid var(--border)' }} />
+      <hr
+        style={{
+          margin: "32px 0",
+          border: 0,
+          borderTop: "1px solid var(--border)",
+        }}
+      />
       <Problem3 />
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -22,14 +34,13 @@ function Practice12() {
 // 대신 반드시 e.preventDefault()로 페이지 새로고침을 막아야 합니다.
 // ─────────────────────────────────────────────
 function Problem1() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [result, setResult] = useState(null)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [result, setResult] = useState(null);
 
   function handleSubmit(e) {
     // TODO 1-1: 가장 먼저 e.preventDefault()로 기본 새로고침을 막으세요.
     //   이 줄이 없으면 폼 제출 시 페이지가 리로드되어 State가 날아갑니다.
-
     // TODO 1-2: { email, password } 객체로 setResult를 호출해 제출 결과를 기록하세요.
   }
 
@@ -37,12 +48,18 @@ function Problem1() {
     <div className="exercise">
       <h3>문제 1: 로그인 폼 — onSubmit + preventDefault</h3>
       <p>
-        Enter 키로도, 버튼 클릭으로도 제출되는 폼을 만드세요. 새로고침이 발생하면 e.preventDefault()를 빠뜨린 것입니다.
+        Enter 키로도, 버튼 클릭으로도 제출되는 폼을 만드세요. 새로고침이
+        발생하면 e.preventDefault()를 빠뜨린 것입니다.
       </p>
 
       <form
         onSubmit={handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 420 }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          maxWidth: 420,
+        }}
       >
         <input
           type="email"
@@ -64,17 +81,18 @@ function Problem1() {
       {result && (
         <div
           className="practice-card"
-          style={{ marginTop: 12, fontFamily: 'var(--mono)', fontSize: 13 }}
+          style={{ marginTop: 12, fontFamily: "var(--mono)", fontSize: 13 }}
         >
           제출 결과: {JSON.stringify(result)}
         </div>
       )}
 
       <p className="expected">
-        기대 결과: 입력 후 Enter 또는 "로그인" 버튼 클릭 시 페이지 새로고침 없이 제출 결과가 아래에 표시됩니다.
+        기대 결과: 입력 후 Enter 또는 "로그인" 버튼 클릭 시 페이지 새로고침 없이
+        제출 결과가 아래에 표시됩니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -83,21 +101,35 @@ function Problem1() {
 // "조건이 맞으면 에러 저장하고 return"을 차례로 나열하면 복잡한 검증도 깔끔합니다.
 // ─────────────────────────────────────────────
 function Problem2() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [error, setError] = useState('')
-  const [successMessage, setSuccessMessage] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   function handleSubmit(e) {
-    e.preventDefault()
-    setSuccessMessage('')
+    e.preventDefault();
+    setSuccessMessage("");
 
     // TODO 2-1: email.includes('@') 가 false면 setError('올바른 이메일을 입력해주세요') 후 return.
     // TODO 2-2: password.length < 8 이면 setError('비밀번호는 8자 이상이어야 해요') 후 return.
     // TODO 2-3: password !== passwordConfirm 이면 setError('비밀번호가 일치하지 않아요') 후 return.
     // TODO 2-4: 모든 검증 통과 시 setError('')로 초기화하고
     //           setSuccessMessage(`${email} 로 가입 완료!`)를 호출하세요.
+    if (!email.includes("@")) {
+      setError("올바른 이메일을 입력해주세요");
+      return;
+    }
+    if (password.length < 8) {
+      setError("비밀번호는 8자 이상이어야 한다고 임마");
+      return;
+    }
+    if (password !== passwordConfirm) {
+      setError("비밀번호가 일치하질 않잖아");
+      return;
+    }
+    setError("");
+    setSuccessMessage(`${email}로 가입 완료!`);
   }
 
   return (
@@ -110,7 +142,12 @@ function Problem2() {
 
       <form
         onSubmit={handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 420 }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          maxWidth: 420,
+        }}
       >
         <input
           type="text"
@@ -132,20 +169,25 @@ function Problem2() {
         />
 
         {error && (
-          <p style={{ color: 'crimson', margin: 0, fontSize: 13 }}>⚠️ {error}</p>
+          <p style={{ color: "crimson", margin: 0, fontSize: 13 }}>
+            ⚠️ {error}
+          </p>
         )}
         {successMessage && (
-          <p style={{ color: 'green', margin: 0, fontSize: 13 }}>✅ {successMessage}</p>
+          <p style={{ color: "green", margin: 0, fontSize: 13 }}>
+            ✅ {successMessage}
+          </p>
         )}
 
         <button type="submit">가입하기</button>
       </form>
 
       <p className="expected">
-        기대 결과: 각 조건에 맞지 않으면 해당 에러 문구가 표시되고, 모든 조건을 만족해야만 초록색 성공 메시지가 뜹니다.
+        기대 결과: 각 조건에 맞지 않으면 해당 에러 문구가 표시되고, 모든 조건을
+        만족해야만 초록색 성공 메시지가 뜹니다.
       </p>
     </div>
-  )
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -155,16 +197,16 @@ function Problem2() {
 // isSubmitting으로 버튼을 disabled 처리해서 연타를 막고, finally에서 해제하세요.
 // ─────────────────────────────────────────────
 function Problem3() {
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [savedPost, setSavedPost] = useState(null)
-  const [error, setError] = useState('')
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [savedPost, setSavedPost] = useState(null);
+  const [error, setError] = useState("");
 
   async function handleSubmit(e) {
-    e.preventDefault()
-    setError('')
-    setSavedPost(null)
+    e.preventDefault();
+    setError("");
+    setSavedPost(null);
 
     // TODO 3-1: 시작 시 setIsSubmitting(true), 끝(finally)에서 setIsSubmitting(false).
     // TODO 3-2: try 블록에서 아래 POST 요청을 보내세요.
@@ -181,12 +223,18 @@ function Problem3() {
     <div className="exercise">
       <h3>문제 3: POST 요청 + isSubmitting</h3>
       <p>
-        아래 폼을 JSONPlaceholder에 POST로 전송하세요. 요청 중에는 버튼을 비활성화하고 문구를 바꿔야 합니다.
+        아래 폼을 JSONPlaceholder에 POST로 전송하세요. 요청 중에는 버튼을
+        비활성화하고 문구를 바꿔야 합니다.
       </p>
 
       <form
         onSubmit={handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 520 }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          maxWidth: 520,
+        }}
       >
         <input
           type="text"
@@ -202,11 +250,11 @@ function Problem3() {
           rows={4}
           style={{
             padding: 8,
-            border: '1px solid var(--border)',
+            border: "1px solid var(--border)",
             borderRadius: 6,
-            background: 'var(--bg)',
-            color: 'var(--text-h)',
-            fontFamily: 'inherit',
+            background: "var(--bg)",
+            color: "var(--text-h)",
+            fontFamily: "inherit",
             fontSize: 14,
           }}
           required
@@ -217,24 +265,27 @@ function Problem3() {
         <button type="submit">게시물 작성</button>
 
         {error && (
-          <p style={{ color: 'crimson', margin: 0, fontSize: 13 }}>⚠️ {error}</p>
+          <p style={{ color: "crimson", margin: 0, fontSize: 13 }}>
+            ⚠️ {error}
+          </p>
         )}
       </form>
 
       {savedPost && (
         <div
           className="practice-card"
-          style={{ marginTop: 12, fontFamily: 'var(--mono)', fontSize: 13 }}
+          style={{ marginTop: 12, fontFamily: "var(--mono)", fontSize: 13 }}
         >
           서버 응답: {JSON.stringify(savedPost)}
         </div>
       )}
 
       <p className="expected">
-        기대 결과: 제출 시 버튼이 "전송 중..."으로 바뀌며 비활성화되고, 응답이 도착하면 서버가 돌려준 id(예: 101)가 포함된 JSON이 표시됩니다.
+        기대 결과: 제출 시 버튼이 "전송 중..."으로 바뀌며 비활성화되고, 응답이
+        도착하면 서버가 돌려준 id(예: 101)가 포함된 JSON이 표시됩니다.
       </p>
     </div>
-  )
+  );
 }
 
-export default Practice12
+export default Practice12;
