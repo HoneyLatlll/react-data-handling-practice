@@ -304,6 +304,17 @@ function Problem4() {
         {/* TODO 4-2: 각 버튼에 key={page}, onClick={() => setCurrentPage(page)}를 설정하고,
                      className={page === currentPage ? 'active' : ''}로 강조하세요. */}
         {/* 여기에 map 코드를 작성하세요 */}
+        {Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1).map((page) => (
+          <>
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={page === currentPage ? "active" : ""}
+            >
+              {page}
+            </button>
+          </>
+        ))}
       </div>
 
       <p className="expected">

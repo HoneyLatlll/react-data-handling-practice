@@ -125,6 +125,7 @@ function Problem2() {
       console.log(typeof data);
       setPosts(data);
     }
+
     load();
   }, [userId]);
 
@@ -303,6 +304,15 @@ function Problem4() {
     //     setRequestCount(prev => prev + 1)
     //   }, 500)
     //   return () => clearTimeout(timerId)
+    const timerId = setTimeout(async () => {
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?title_like=${keyword}&_limit=10`,
+      );
+      const data = await res.json();
+      setResults(data);
+      setRequestCount((prev) => prev + 1);
+    }, 500);
+    return () => clearTimeout(timerId);
   }, [keyword]);
 
   return (
