@@ -94,7 +94,7 @@ function Problem2() {
   const [gender, setGender] = useState("");
   const [country, setCountry] = useState("korea");
 
-  const onchange = (e) => setAgreed(e.target.checked);
+  const onChange = (e) => setAgreed(e.target.checked);
 
   return (
     <div className="exercise">
@@ -111,7 +111,7 @@ function Problem2() {
           <input
             type="checkbox"
             checked={agreed}
-            onChange={(e) => onchange(e)}
+            onChange={(e) => onChange(e)}
           />{" "}
           이용약관에 동의합니다
         </label>
@@ -223,10 +223,21 @@ function Problem3() {
           />
           {/* TODO 3-5: password가 비어있지 않고 isValidPassword가 false면
                        "비밀번호는 8자 이상이어야 해요" 메시지를 표시하세요. */}
+          {password && !isValidPassword ? (
+            <p style={{ color: "crimson", fontSize: 12 }}>
+              비밀번호는 8자 이상이어야함
+            </p>
+          ) : null}
         </div>
 
         {/* TODO 3-6: button에 disabled={!canSubmit}를 설정하세요. */}
-        <button type="button">가입하기</button>
+        <button
+          type="button"
+          disabled={!canSubmit}
+          onClick={() => alert("비활성화 체크")}
+        >
+          가입하기
+        </button>
       </div>
 
       <p className="expected">
