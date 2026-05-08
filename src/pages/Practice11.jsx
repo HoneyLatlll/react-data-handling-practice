@@ -264,6 +264,11 @@ function Problem4() {
     e.preventDefault();
     // TODO 4-1: nameRef.current.value와 emailRef.current.value를 읽어서
     //   { name, email } 객체로 setSubmitted에 저장하세요.
+    const { name, email } = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+    };
+    setSubmitted({ name, email });
   }
 
   return (
@@ -285,10 +290,15 @@ function Problem4() {
       >
         {/* TODO 4-2: 이 input에 ref={nameRef}와 defaultValue="홍길동"을 설정하세요. */}
         {/* ⚠️ value를 쓰면 onChange가 없다는 경고가 콘솔에 뜹니다. defaultValue를 쓰세요. */}
-        <input type="text" placeholder="이름" />
+        <input
+          type="text"
+          placeholder="이름"
+          ref={nameRef}
+          defaultValue="홍길동"
+        />
 
         {/* TODO 4-3: 이 input에 ref={emailRef}를 연결하세요. (defaultValue는 비워도 됩니다) */}
-        <input type="email" placeholder="이메일" />
+        <input type="email" placeholder="이메일" ref={emailRef} />
 
         <button type="submit">제출</button>
       </form>
@@ -298,7 +308,12 @@ function Problem4() {
           className="practice-card"
           style={{ marginTop: 12, fontFamily: "var(--mono)", fontSize: 13 }}
         >
-          제출된 값: {JSON.stringify(submitted)}
+          제출된 값:
+          {
+            <p>
+              name:{submitted.name} email:{submitted.email}
+            </p>
+          }
         </div>
       )}
 

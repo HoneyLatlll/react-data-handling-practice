@@ -117,6 +117,7 @@ function Problem2() {
           : "https://jsonplaceholder.typicode.com/invalid-endpoint-404";
 
         const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP 에러, ${res.status}`);
 
         // TODO 2-1: res.ok가 false이면 throw new Error(...)로 에러를 던지세요.
         //   HINT: if (!res.ok) throw new Error(`요청 실패 (status: ${res.status})`)
@@ -125,6 +126,7 @@ function Problem2() {
         setPost(data);
       } catch (err) {
         // TODO 2-2: err.message를 setError에 저장해서 아래 에러 UI가 보이게 하세요.
+        setError(err.message);
       }
     }
     load();
@@ -212,6 +214,7 @@ function Problem3() {
     }
     load();
   }, [mode]);
+  console.log(posts);
 
   return (
     <div className="exercise">
@@ -257,11 +260,19 @@ function Problem3() {
 
 function Content({ posts, isLoading, error }) {
   // TODO 3-1: isLoading이 true이면 <p>⏳ 로딩 중...</p>을 return 하세요.
+  if (isLoading) return <p>⏳ 로딩 중...</p>;
   // TODO 3-2: error가 있으면 <p>⚠️ {error}</p>를 return 하세요.
+  if (error) return <p>⚠️ {error}</p>;
   // TODO 3-3: posts.length === 0이면 <p>📭 게시글이 없습니다</p>를 return 하세요.
+  if (posts.length === 0) return <p>📭 게시글이 없습니다</p>;
   // TODO 3-4: 마지막으로 posts를 ul > li로 렌더링 하세요.
+  return posts.map((post) => (
+    <ul key={post.id}>
+      <li>{post.title}</li>
+    </ul>
+  ));
 
-  return <p style={{ color: "var(--accent)" }}>TODO: Content를 완성하세요.</p>;
+  // return <p style={{ color: "var(--accent)" }}>TODO: Content를 완성하세요.</p>;
 }
 
 // ─────────────────────────────────────────────
@@ -272,12 +283,22 @@ function Content({ posts, isLoading, error }) {
 function Problem4() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [userId, setUserId] = useState(1);
 
   async function loadUsers() {
-    // TODO 4-1: 시작 시 setIsLoading(true), 끝(finally)에서 setIsLoading(false) 하세요.
-    // TODO 4-2: try 안에서 fetch('https://jsonplaceholder.typicode.com/users?_limit=5')
-    //            → json() → setUsers
-    // (일부러 약간의 지연을 만들고 싶다면 await new Promise(r => setTimeout(r, 800)) 추가)
+    setIsLoading(true);
+    try {
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${userId}`,
+      );
+      if (!res.ok) throw new Error(`HTTP 에러 ${res.status}`);
+      const data = await res.json();
+      setUsers((prev) => [...prev, data]);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -290,13 +311,21 @@ function Problem4() {
 
       <div className="toolbar">
         {/* TODO 4-3: 버튼에 disabled={isLoading}과, 로딩 중엔 "불러오는 중..."으로 바뀌도록 작성하세요. */}
-        {/* HINT: <button onClick={loadUsers} disabled={isLoading}>
-                     {isLoading ? '불러오는 중...' : '사용자 불러오기'}
+        {/* HINT: <button onClick={loadUsers} disabled={isLoading}> {isLoading ? '불러오는 중...' : '사용자 불러오기'}
                  </button> */}
-        <button onClick={loadUsers}>사용자 불러오기</button>
+        <button
+          onClick={() => {
+            loadUsers();
+            setUserId((prev) => prev + 1);
+          }}
+          disabled={isLoading}
+        >
+          {isLoading ? "불러오는 중..." : "사용자 불러오기"}
+        </button>
       </div>
 
       <ul className="practice-list">
+        {console.log(users)}
         {users.map((user) => (
           <li key={user.id}>
             <span>{user.name}</span>

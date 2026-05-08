@@ -95,6 +95,9 @@ function Problem2() {
   function handleGood() {
     // TODO 2-1: setCount(prev => prev + 1)을 3번 호출해서 실제로 +3 되도록 구현하세요.
     //   함수형 업데이트를 쓰면 React가 각 호출마다 누적된 최신 값을 넘겨줍니다.
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
   }
 
   return (
@@ -142,6 +145,7 @@ function Problem3() {
         `https://jsonplaceholder.typicode.com/posts?_start=${offset}&_limit=${LIMIT}`,
       );
       const data = await res.json();
+      setPosts((prev) => [...prev, ...data]);
 
       // TODO 3-1: setPosts를 함수형 업데이트로 작성해서, 기존 posts 뒤에 data를 이어붙이세요.
       //   ❌ 값 전달: setPosts([...posts, ...data])  → 빠르게 연타 시 일부가 덮어써짐
@@ -153,6 +157,7 @@ function Problem3() {
   function loadMore() {
     // TODO 3-2: offset도 함수형 업데이트로 증가시키세요.
     //   HINT: setOffset(prev => prev + LIMIT)
+    setOffset((prev) => prev + LIMIT);
   }
 
   return (
