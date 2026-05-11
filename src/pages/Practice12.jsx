@@ -42,6 +42,8 @@ function Problem1() {
     // TODO 1-1: 가장 먼저 e.preventDefault()로 기본 새로고침을 막으세요.
     //   이 줄이 없으면 폼 제출 시 페이지가 리로드되어 State가 날아갑니다.
     // TODO 1-2: { email, password } 객체로 setResult를 호출해 제출 결과를 기록하세요.
+    e.preventDefault();
+    setResult({ email, password });
   }
 
   return (
@@ -207,7 +209,21 @@ function Problem3() {
     e.preventDefault();
     setError("");
     setSavedPost(null);
-
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, body, userId: 1 }),
+      });
+      if (!res.ok) throw new Error(`HTTP 에러 발생 : ${res.status}`);
+      const data = await res.json();
+      setSavedPost(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
     // TODO 3-1: 시작 시 setIsSubmitting(true), 끝(finally)에서 setIsSubmitting(false).
     // TODO 3-2: try 블록에서 아래 POST 요청을 보내세요.
     //   URL: https://jsonplaceholder.typicode.com/posts
@@ -262,7 +278,10 @@ function Problem3() {
 
         {/* TODO 3-6: 버튼에 disabled={isSubmitting}를 설정하고,
                      isSubmitting이 true일 때 "전송 중..." 아닐 때 "게시물 작성"으로 문구를 바꾸세요. */}
-        <button type="submit">게시물 작성</button>
+        <button type="submit" disabled={isSubmitting}>
+          {console.log(isSubmitting)}
+          {isSubmitting ? "전송 중..." : "게시물 작성"}
+        </button>
 
         {error && (
           <p style={{ color: "crimson", margin: 0, fontSize: 13 }}>
@@ -270,7 +289,7 @@ function Problem3() {
           </p>
         )}
       </form>
-
+      {console.log(savedPost)}
       {savedPost && (
         <div
           className="practice-card"

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 // 실습 16 문제 3
 // ─────────────────────────────────────────────
@@ -17,17 +17,23 @@ import { useState } from 'react'
 // ─────────────────────────────────────────────
 function useForm(initialValues) {
   // 여기에 구현하세요
-  const [values, setValues] = useState(initialValues)
+  const [values, setValues] = useState(initialValues);
 
-  function handleChange() {
+  function handleChange(e) {
     // 여기에 구현하세요
+    const { name, value, type, checked } = e.target;
+    setValues({
+      ...values,
+      [name]: type === "checkbox" ? checked : value,
+    });
   }
 
   function reset() {
     // 여기에 구현하세요
+    setValues(initialValues);
   }
 
-  return { values, handleChange, reset }
+  return { values, handleChange, reset };
 }
 
-export default useForm
+export default useForm;

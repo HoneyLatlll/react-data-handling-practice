@@ -47,6 +47,7 @@ function Problem1() {
   function handleChange(e) {
     // TODO 1-1: e.target.files[0]을 꺼내 setFile에 저장하세요.
     //   ⚠️ value가 아니라 files[0] 입니다.
+    setFile(e.target.files[0]);
   }
 
   return (
@@ -98,9 +99,14 @@ function Problem2() {
     // TODO 2-1: selected.type이 'image/'로 시작하지 않으면
     //   setError('이미지 파일만 업로드 가능해요') 후 return 하세요.
     //   HINT: selected.type.startsWith('image/')
+    if (!selected.type.startsWith("image/")) return;
 
     // TODO 2-2: selected.size가 MAX_IMAGE_SIZE를 초과하면
     //   setError('5MB 이하만 가능해요') 후 return 하세요.
+    if (selected.size > MAX_IMAGE_SIZE) {
+      setError("5MB 이하만 가능");
+      return;
+    }
 
     // 통과하면 상태에 저장 + 미리보기 URL 생성
     setImage(selected);
@@ -116,7 +122,7 @@ function Problem2() {
       </p>
 
       {/* TODO 2-3: input에 accept="image/*" 속성을 추가해 이미지만 필터링하세요. */}
-      <input type="file" onChange={handleChange} />
+      <input type="file" onChange={handleChange} accept="image/*" />
 
       {error && (
         <p style={{ color: "crimson", marginTop: 8, fontSize: 13 }}>
@@ -156,11 +162,13 @@ function Problem3() {
   function handleChange(e) {
     // TODO 3-1: e.target.files(FileList)를 Array.from으로 진짜 배열로 변환한 뒤 setFiles에 저장하세요.
     //   HINT: Array.from(e.target.files)
+    setFiles(Array.from(e.target.files));
   }
 
   function removeAt(index) {
     // TODO 3-2: files에서 index 번째 요소를 제거한 새 배열을 만들어 setFiles에 저장하세요.
     //   HINT: files.filter((_, i) => i !== index)
+    setFiles(files.filter((file, i) => i !== index));
   }
 
   return (
@@ -172,7 +180,7 @@ function Problem3() {
       </p>
 
       {/* TODO 3-3: input에 multiple 속성을 추가하세요. */}
-      <input type="file" onChange={handleChange} />
+      <input type="file" onChange={handleChange} multiple={true} />
 
       <ul className="practice-list" style={{ marginTop: 12 }}>
         {files.map((file, index) => (

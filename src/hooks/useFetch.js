@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 // 실습 16 문제 1
 // ─────────────────────────────────────────────
@@ -18,7 +18,27 @@ import { useEffect, useState } from 'react'
 // ─────────────────────────────────────────────
 function useFetch(url) {
   // 여기에 구현하세요
-  return { data: null, loading: false, error: null }
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP 에러 발생 ${res.status}`);
+        const list = await res.json();
+        setData(list);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getData();
+  }, [url]);
+
+  return { data, loading, error };
 }
 
-export default useFetch
+export default useFetch;
